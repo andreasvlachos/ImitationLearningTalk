@@ -13,4 +13,4 @@ You need to install RISE following the instructions here: https://github.com/dam
 
 We assume python3, jupyter, svgwrite and the Chrome browser
 
-To run execute `jupyter notebook` and pick the appropriate notebeook.
+To run execute `jupyter notebook` and pick the appropriate notebook.
