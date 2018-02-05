@@ -1,64 +1,8 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="chrome=1" />
-
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-<title>Imitation Learning slides</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<head><meta charset="utf-8" />
+<title>Imitation Learning</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-<!-- General and theme style sheets -->
-<link rel="stylesheet" href="reveal.js/css/reveal.css">
-<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
-
-<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-<script>
-if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = 'reveal.js/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-}
-
-</script>
-
-<!--[if lt IE 9]>
-<script src="reveal.js/lib/js/html5shiv.js"></script>
-<![endif]-->
-
-<!-- Loading the mathjax macro -->
-<!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-    <!-- MathJax configuration -->
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-            processEscapes: true,
-            processEnvironments: true
-        },
-        // Center justify equations in code and markdown cells. Elsewhere
-        // we use CSS to left justify single line equations in code cells.
-        displayAlign: 'center',
-        "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: { automatic: true }
-        }
-    });
-    </script>
-    <!-- End of mathjax configuration -->
-
-<!-- Get Font-awesome from cdn -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
 
 <style type="text/css">
     /*!
@@ -11774,86 +11718,176 @@ ul.typeahead-list > li > a {
 
 <style type="text/css">
 /* Overrides of notebook CSS for static HTML export */
-.reveal {
-  font-size: 160%;
-  overflow-y: scroll;
+body {
+  overflow: visible;
+  padding: 8px;
 }
-.reveal pre {
-  width: inherit;
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+
+div#notebook {
+  overflow: visible;
+  border-top: none;
 }
-.reveal pre code {
-  padding: 0px;
-}
-.reveal section img {
-  border: 0px solid black;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0);
-}
-.reveal i {
-  font-style: normal;
-  font-family: FontAwesome;
-  font-size: 2em;
-}
-.reveal .slides {
-  text-align: left;
-}
-.reveal.fade {
-  opacity: 1;
-}
-.reveal .progress {
-  position: static;
-}
-div.input_area {
-  padding: 0.06em;
-}
-div.code_cell {
-  background-color: transparent;
-}
-div.prompt {
-  width: 11ex;
-  padding: 0.4em;
-  margin: 0px;
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-  text-align: right;
-}
-div.output_area pre {
-  font-family: monospace, sans-serif;
-  font-size: 80%;
-}
-div.output_prompt {
-  /* 5px right shift to account for margin in parent container */
-  margin: 5px 5px 0 0;
-}
-div.text_cell.rendered .rendered_html {
-  /* The H1 height seems miscalculated, we are just hidding the scrollbar */
-  overflow-y: hidden;
-}
-a.anchor-link {
-  /* There is still an anchor, we are only hidding it */
-  display: none;
-}
-.rendered_html p {
-  text-align: inherit;
+
+@media print {
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  } 
+  div.output_wrapper { 
+    display: block;
+    page-break-inside: avoid; 
+  }
+  div.output { 
+    display: block;
+    page-break-inside: avoid; 
+  }
 }
 </style>
 
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
 
-</head>
-
-
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration --></head>
 <body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="reveal">
-<div class="slides">
-<section><section>
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">il_tutorial.cost_graphs</span> <span class="k">as</span> <span class="nn">cg</span>
+<span class="kn">import</span> <span class="nn">il_tutorial.util</span> <span class="k">as</span> <span class="nn">util</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;script&gt;</span>
+<span class="s1">code_show=true; </span>
+<span class="s1">function code_toggle() {</span>
+<span class="s1"> if (code_show){</span>
+<span class="s1"> $(&#39;div.input&#39;).hide();</span>
+<span class="s1"> } else {</span>
+<span class="s1"> $(&#39;div.input&#39;).show();</span>
+<span class="s1"> }</span>
+<span class="s1"> code_show = !code_show</span>
+<span class="s1">} </span>
+<span class="s1">$( document ).ready(code_toggle);</span>
+<span class="s1">&lt;/script&gt;</span>
+<span class="s1">The raw code for this IPython notebook is by default hidden for easier reading.</span>
+<span class="s1">To toggle on/off the raw code, click &lt;a href=&quot;javascript:code_toggle()&quot;&gt;here&lt;/a&gt;.&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<script>
+code_show=true; 
+function code_toggle() {
+ if (code_show){
+ $('div.input').hide();
+ } else {
+ $('div.input').show();
+ }
+ code_show = !code_show
+} 
+$( document ).ready(code_toggle);
+</script>
+The raw code for this IPython notebook is by default hidden for easier reading.
+To toggle on/off the raw code, click <a href="javascript:code_toggle()">here</a>.
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11876,7 +11910,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 </center>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11886,7 +11920,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 <thead>
 <tr>
 <th>I</th> 
-<th>studied</th>
+<th>worked</th>
 <th>in</th>
 <th>London</th>
 <th>with</th>
@@ -11922,7 +11956,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
             </p>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11931,7 +11965,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 <p><b>Input:</b> a sentence $\mathbf{x}=[x_1...x_N]$<br> <b>Output:</b> a sequence of labels $\mathbf{y}=[y_{1}\ldots y_{N}] \in {\cal Y}^N$</p>
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11945,7 +11979,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 </center>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11956,7 +11990,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 <b>Output:</b> a meaning representation graph $\mathbf{G}=(V,E) \in {\cal G_{\mathbf{x}}}$</p>
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11967,7 +12001,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 <b>Output:</b> $\mathbf{w}=[w_1...w_N], w\in {\cal V}\cup END, w_N=END$</p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11978,7 +12012,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -11989,7 +12023,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12000,7 +12034,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12011,7 +12045,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12021,7 +12055,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12038,7 +12072,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12052,15 +12086,15 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 </ul>
 </li>
 <li>Applications<ul>
-<li>Semantic parsing</li>
 <li>Natural language generation</li>
+<li>Semantic parsing</li>
 </ul>
 </li>
 </ul>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12071,7 +12105,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 </center>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12085,7 +12119,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12102,7 +12136,7 @@ Joint work with Gerasimos Lampouras (Sheffield), Sebastian Riedel (UCL),<br> Dan
 
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12117,7 +12151,7 @@ $$\mathbf{\hat y} =\hat y_{1}\ldots \hat y_{N} = \mathop{\arg \max}_{Y \in {\cal
                 </ul>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12136,7 +12170,7 @@ $$\mathbf{\hat y} =\hat y_{1}\ldots \hat y_{N} = \mathop{\arg \max}_{Y \in {\cal
                 </ul>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12150,7 +12184,7 @@ $$\mathbf{\hat y} =\hat y_{1}\ldots \hat y_{N} = \mathop{\arg \max}_{Y \in {\cal
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12161,7 +12195,7 @@ but generate better (non-i.i.d.) training data</p>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12176,7 +12210,7 @@ but generate better (non-i.i.d.) training data</p>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12186,7 +12220,7 @@ but generate better (non-i.i.d.) training data</p>
 
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12203,7 +12237,7 @@ but generate better (non-i.i.d.) training data</p>
 </p>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12215,17 +12249,17 @@ but generate better (non-i.i.d.) training data</p>
 </ul>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Supervising-the-classifier">Supervising the classifier<a class="anchor-link" href="#Supervising-the-classifier">&#182;</a></h3><p>What are good actions in incremental structured prediction?</p>
+<h3 id="Teaching-the-classifier">Teaching the classifier<a class="anchor-link" href="#Teaching-the-classifier">&#182;</a></h3><p>What are good actions in incremental structured prediction?</p>
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12235,7 +12269,7 @@ but generate better (non-i.i.d.) training data</p>
 $$loss  = L(S_{final}, \mathbf{y}) \geq 0$$
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12248,7 +12282,7 @@ $$loss  = L(S_{final}, \mathbf{y}) \geq 0$$
 </ul>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12258,7 +12292,7 @@ $$loss  = L(S_{final}, \mathbf{y}) \geq 0$$
 <thead>
 <tr>
 <th>I</th> 
-<th>studied</th>
+<th>worked</th>
 <th>in</th>
 <th>London</th>
 <th>with</th>
@@ -12299,7 +12333,7 @@ $$loss  = L(S_{final}, \mathbf{y}) \geq 0$$
 </p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12312,7 +12346,7 @@ $$</p>
 <p class="fragment" data-fragment-index="1"><b>No</b>! (assuming N>1)</p>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12323,7 +12357,7 @@ $$</p>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12333,7 +12367,7 @@ $$</p>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12343,7 +12377,7 @@ $$</p>
 $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {\cal A}} L(S_t(\alpha,\pi^{\star}),\mathbf{y})$$
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12353,7 +12387,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12364,7 +12398,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 <thead>
 <tr>
 <th>I</th> 
-<th>studied</th>
+<th>worked</th>
 <th>in</th>
 <th>London</th>
 <th>with</th>
@@ -12395,7 +12429,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </table>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12405,7 +12439,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12415,7 +12449,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12426,7 +12460,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </center>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12450,7 +12484,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </table>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12460,7 +12494,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12470,7 +12504,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12480,7 +12514,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12492,7 +12526,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">paths</span> <span class="o">=</span> <span class="p">[[],[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)],[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)],[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)]]</span>
@@ -12513,12 +12547,12 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-        <div id="18ffdb0a-3d54-11e7-b6e7-c119ea1d5487" class="carousel" data-ride="carousel" data-interval="false">
+        <div id="72a6c7d2-badf-11e7-88c6-02426d5d0a97" class="carousel" data-ride="carousel" data-interval="false">
           <div class="carousel-inner" role="listbox">
           <div class="item active"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id1" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
 <div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id2" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id2)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
@@ -12526,9 +12560,9 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 <div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id4" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id4)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id4)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="150" /><line marker-end="url(#id4)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="150" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
           </div>
           <!-- Controls -->
-          <a href="#18ffdb0a-3d54-11e7-b6e7-c119ea1d5487" role="button2" data-slide="prev">Previous</a>
+          <a href="#72a6c7d2-badf-11e7-88c6-02426d5d0a97" role="button2" data-slide="prev">Previous</a>
           &nbsp
-          <a  href="#18ffdb0a-3d54-11e7-b6e7-c119ea1d5487" role="button2" data-slide="next">Next</a>
+          <a  href="#72a6c7d2-badf-11e7-88c6-02426d5d0a97" role="button2" data-slide="next">Next</a>
         </div>
         
 </div>
@@ -12538,7 +12572,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </div>
 </div>
 
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12552,7 +12586,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </p>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12564,7 +12598,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gold_path</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
@@ -12581,7 +12615,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
@@ -12627,7 +12661,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </table>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12647,7 +12681,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </p>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12659,7 +12693,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">wrong_path</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
@@ -12676,20 +12710,20 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-        <div id="1eb4dc4e-3d54-11e7-b6e7-c119ea1d5487" class="carousel" data-ride="carousel" data-interval="false">
+        <div id="7c68e05c-badf-11e7-88c6-02426d5d0a97" class="carousel" data-ride="carousel" data-interval="false">
           <div class="carousel-inner" role="listbox">
           <div class="item active"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id5" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id5)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id5)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="150" /><line marker-end="url(#id5)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="150" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
 <div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id6" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id6)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id6)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
           </div>
           <!-- Controls -->
-          <a href="#1eb4dc4e-3d54-11e7-b6e7-c119ea1d5487" role="button2" data-slide="prev">Previous</a>
+          <a href="#7c68e05c-badf-11e7-88c6-02426d5d0a97" role="button2" data-slide="prev">Previous</a>
           &nbsp
-          <a  href="#1eb4dc4e-3d54-11e7-b6e7-c119ea1d5487" role="button2" data-slide="next">Next</a>
+          <a  href="#7c68e05c-badf-11e7-88c6-02426d5d0a97" role="button2" data-slide="next">Next</a>
         </div>
         
 </div>
@@ -12699,7 +12733,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </div>
 </div>
 
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12725,7 +12759,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </p>
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12750,7 +12784,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 </table></p>
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12760,7 +12794,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12770,7 +12804,7 @@ $$\alpha^{\star}=\pi^{\star}(S_t, \mathbf{y}) = \mathop{\arg \min}_{\alpha \in {
 $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12794,7 +12828,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 </p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12809,7 +12843,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12819,7 +12853,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12829,7 +12863,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12841,10 +12875,12 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cb_gold</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gold_path</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">cb_gold</span> <span class="o">=</span> <span class="n">cg</span><span class="o">.</span><span class="n">draw_cost_breakdown</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">gold_path</span><span class="p">)</span>
+<span class="n">cb_gold</span>
 </pre></div>
 
 </div>
@@ -12856,11 +12892,11 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[12]:</div>
+<div class="prompt output_prompt">Out[15]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id5" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id5)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id5)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="150" /><line marker-end="url(#id5)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="150" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg>
+<svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id21" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id21)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id21)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="150" /><line marker-end="url(#id21)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="150" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg>
 </div>
 
 </div>
@@ -12914,7 +12950,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 </table>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -12926,7 +12962,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">gold_path</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -12956,25 +12992,25 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[13]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-        <div id="5a06bb6e-3d54-11e7-b6e7-c119ea1d5487" class="carousel" data-ride="carousel" data-interval="false">
+        <div id="64ce1738-bb10-11e7-88c6-02426d5d0a97" class="carousel" data-ride="carousel" data-interval="false">
           <div class="carousel-inner" role="listbox">
-          <div class="item active"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id7" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id7)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
-<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id8" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id8)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id8)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="50" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="35">explore</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
-<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id9" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id9)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id9)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="50" /><line marker-end="url(#id9)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="50" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="35">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
-<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id10" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id10)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id10)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="50" /><line marker-end="url(#id10)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="50" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 1</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="35">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
-<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id11" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id11)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id11)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="100" /><line marker-end="url(#id11)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="100" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 1</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="85">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
-<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id12" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id12)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id12)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="150" /><line marker-end="url(#id12)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="150" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 0</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="135">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
-<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id13" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id13)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id13)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="200" /><line marker-end="url(#id13)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="200" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 1</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="185">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
+          <div class="item active"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id22" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id22)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
+<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id23" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id23)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id23)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="50" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="35">explore</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
+<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id24" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id24)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id24)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="50" /><line marker-end="url(#id24)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="50" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="35">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
+<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id25" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id25)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id25)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="50" /><line marker-end="url(#id25)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="50" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 1</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="35">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
+<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id26" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id26)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id26)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="100" /><line marker-end="url(#id26)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="100" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 1</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="85">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
+<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id27" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id27)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id27)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="150" /><line marker-end="url(#id27)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="150" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 0</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="135">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
+<div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id28" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id28)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id28)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="200" /><line marker-end="url(#id28)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="200" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 1</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="185">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
           </div>
           <!-- Controls -->
-          <a href="#5a06bb6e-3d54-11e7-b6e7-c119ea1d5487" role="button2" data-slide="prev">Previous</a>
+          <a href="#64ce1738-bb10-11e7-88c6-02426d5d0a97" role="button2" data-slide="prev">Previous</a>
           &nbsp
-          <a  href="#5a06bb6e-3d54-11e7-b6e7-c119ea1d5487" role="button2" data-slide="next">Next</a>
+          <a  href="#64ce1738-bb10-11e7-88c6-02426d5d0a97" role="button2" data-slide="next">Next</a>
         </div>
         
 </div>
@@ -12984,7 +13020,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 </div>
 </div>
 
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13018,7 +13054,7 @@ $$\pi^{in} = \beta\pi^{\star} + (1-\beta)H$$
 </ul>
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13032,7 +13068,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cb_mix_costs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -13061,12 +13097,12 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 
 
 <div class="output_area">
-<div class="prompt output_prompt">Out[14]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-        <div id="1abb88a8-3d55-11e7-b6e7-c119ea1d5487" class="carousel" data-ride="carousel" data-interval="false">
+        <div id="8e3a0cfc-badf-11e7-88c6-02426d5d0a97" class="carousel" data-ride="carousel" data-interval="false">
           <div class="carousel-inner" role="listbox">
           <div class="item active"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id14" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id14)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
 <div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id15" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id15)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id15)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="50" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="35">explore</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
@@ -13076,9 +13112,9 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 <div class="item"><svg baseProfile="full" height="315.0" version="1.1" width="500" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><marker id="id19" markerHeight="10" markerWidth="10" orient="auto" refX="5" refY="5"><path d="M 0 0 L 10 5 L 0 10 z" fill="blue" /></marker></defs><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="50">Noun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="100">Verb</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="150">Modal</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="200">Pronoun</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="0" y="250">NULL</text><text style="font-size:25px; font-family:Lato" x="100" y="300">NULL</text><text style="font-size:25px; font-family:Lato" x="200" y="300">I</text><text style="font-size:25px; font-family:Lato" x="300" y="300">can</text><text style="font-size:25px; font-family:Lato" x="400" y="300">fly</text><line marker-end="url(#id19)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="100" x2="200" y1="250" y2="200" /><line marker-end="url(#id19)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="200" x2="300" y1="200" y2="200" /><line marker-end="url(#id19)" stroke="rgb(10%,10%,16%)" stroke-width="2.5" x1="300" x2="400" y1="200" y2="100" /><text style="font-size:25px; font-weight:bold; font-family:Lato" x="410" y="100">cost = 1</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="185" y="185">rollin</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="285" y="185">explore</text><text style="font-size:25px; font-weight:bold; font-family:Lato" x="385" y="35">rollout</text><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="105" x2="195" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="205" x2="295" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="50" y2="50" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="100" y2="100" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="150" y2="150" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="200" y2="200" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="305" x2="395" y1="250" y2="250" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="100" x2="100" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="200" x2="200" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="300" x2="300" y1="205" y2="245" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="55" y2="95" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="105" y2="145" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="155" y2="195" /><line stroke="rgb(10%,10%,16%)" stroke-dasharray="5 5" x1="400" x2="400" y1="205" y2="245" /></svg></div>
           </div>
           <!-- Controls -->
-          <a href="#1abb88a8-3d55-11e7-b6e7-c119ea1d5487" role="button2" data-slide="prev">Previous</a>
+          <a href="#8e3a0cfc-badf-11e7-88c6-02426d5d0a97" role="button2" data-slide="prev">Previous</a>
           &nbsp
-          <a  href="#1abb88a8-3d55-11e7-b6e7-c119ea1d5487" role="button2" data-slide="next">Next</a>
+          <a  href="#8e3a0cfc-badf-11e7-88c6-02426d5d0a97" role="button2" data-slide="next">Next</a>
         </div>
         
 </div>
@@ -13088,7 +13124,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </div>
 </div>
 
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13116,7 +13152,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </table>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13142,7 +13178,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13159,7 +13195,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13173,7 +13209,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13206,7 +13242,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </table>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13220,7 +13256,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13244,7 +13280,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </p>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13256,7 +13292,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 <th style="padding: 10px;">Method</th>
 <th style="padding: 10px;">rollin</th>
 <th style="padding: 10px;">rollout</th>
-<th style="padding: 10px;">loss</th>
+<!--<th style="padding: 10px;">loss</th>-->
 <th style="padding: 10px;">expert decay</th>
 <th style="padding: 10px;">training data</th>
 </tr>
@@ -13266,31 +13302,31 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 <td style="padding: 10px;">classification</td>
 <td style="padding: 10px;">expert</td>
 <td style="padding: 10px;">N/A</td>
-<td style="padding: 10px;">0/1</td>
+<!--<td style="padding: 10px;">0/1</td>-->
 <td style="padding: 10px;">N/A</td>
 <td style="padding: 10px;">single iteration</td>
-</tr>
-<tr>
-<td style="padding: 10px;">SEARN</td>
-<td style="padding: 10px;">mix</td>
-<td style="padding: 10px;">mix</td>
-<td style="padding: 10px;">task</td>
-<td style="padding: 10px;">exponential</td>
-<td style="padding: 10px;">weighted averaged across iterations</td>
 </tr>
 <tr>
 <td style="padding: 10px;">DAgger</td>
 <td style="padding: 10px;">mix</td>
 <td style="padding: 10px;">N/A</td>
-<td style="padding: 10px;">0/1</td>
+<!--<td style="padding: 10px;">0/1</td>-->
 <td style="padding: 10px;">decrease</td>
 <td style="padding: 10px;">all iterations</td>
+</tr>
+<tr>
+<td style="padding: 10px;">SEARN</td>
+<td style="padding: 10px;">mix</td>
+<td style="padding: 10px;">mix</td>
+<!--<td style="padding: 10px;">task</td>-->
+<td style="padding: 10px;">exponential</td>
+<td style="padding: 10px;">weighted average across iterations</td>
 </tr>
 <tr>
 <td style="padding: 10px;">V-DAgger</td>
 <td style="padding: 10px;">mix</td>
 <td style="padding: 10px;">mix</td>
-<td style="padding: 10px;">task</td>
+<!--<td style="padding: 10px;">task</td>-->
 <td style="padding: 10px;">exponential</td>
 <td style="padding: 10px;">all iterations</td>
 </tr>
@@ -13298,7 +13334,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 <td style="padding: 10px;">LOLS</td>
 <td style="padding: 10px;">classifier</td>
 <td style="padding: 10px;">action-level mix</td>
-<td style="padding: 10px;">task</td>
+<!--<td style="padding: 10px;">task</td>-->
 <td style="padding: 10px;">no decay</td>
 <td style="padding: 10px;">averaged across iterations</td>
 </tr>
@@ -13306,7 +13342,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </table>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13315,13 +13351,12 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 <h3 id="Summary-so-far">Summary so far<a class="anchor-link" href="#Summary-so-far">&#182;</a></h3><ul>
 <li>basic intuition behind IL</li>
 <li>rollin and the DAgger algorithm </li>
-<li>rollouts, V-DAgger and LOLS</li>
-<li>generic imitation learning recipe</li>
+<li>rollouts, V-DAgger, SEARN and LOLS</li>
 </ul>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13332,7 +13367,220 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </center>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h3>Natural Language Generation (NLG)</h3>
+<img src="images/nlg.png" style="width:80%; background:white;" /></p>
+<p>
+Like machine translation but the training data is rather limited
+</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><h3>Learning NLG</h3>
+<img src="images/ContentAndWord.png" style="width:100%; background:white;" /></p>
+<p>
+<ul>
+<li>Two types of actions: content selection and word prediction</li>
+<li>Unaligned training data underspecifies expert policy</li>
+</ul>
+</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Imitation-learning-for-NLG-(Lampouras-and-Vlachos,-2016)">Imitation learning for NLG (<a href="https://aclweb.org/anthology/C/C16/C16-1105.pdf">Lampouras and Vlachos, 2016</a>)<a class="anchor-link" href="#Imitation-learning-for-NLG-(Lampouras-and-Vlachos,-2016)">&#182;</a></h3><p>Combined elements of <a href="http://www.umiacs.umd.edu/~hal/docs/daume09searn.pdf">SEARN</a> and <a href="https://arxiv.org/abs/1502.02206">LOLS</a>:</p>
+<ul>
+<li><strong>rollin</strong> using the classifier (LOLS)</li>
+<li>at each timestep <strong>rollout</strong> with expert or classifier exclusively (LOLS) with decaying probability for the former (SEARN)</li>
+</ul>
+<p>Improved performance further by <strong>sequence correction</strong>:</p>
+<ul>
+<li>avoiding generating training examples from very bad rollins</li>
+<li>correct them instead and rollin again</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sequence-correction">Sequence correction<a class="anchor-link" href="#Sequence-correction">&#182;</a></h3><p><center>
+<img src="images/seqCorrection3.png" width="70%">
+</center>
+<br>
+<br></p>
+<div style="display:inline-block;">
+<small>
+        <p style="border:2px; border-radius: 15px; background-color:white; border-style:solid; border-color:black; padding: 0.5em; font-size: 80%; display: inline-block">
+        \begin{align}
+        & \text{Predicate: INFORM}\\
+        & \text{______________________}\\
+        & \text{name = X-name-1}\\
+        & \text{dogs_allowed = yes}
+        \end{align}
+        </p>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sequence-correction">Sequence correction<a class="anchor-link" href="#Sequence-correction">&#182;</a></h3><p><center>
+<img src="images/seqCorrection4.png" width="70%">
+</center>
+<br>
+<br></p>
+<div style="display:inline-block;">
+<small>
+        <p style="border:2px; border-radius: 15px; background-color:white; border-style:solid; border-color:black; padding: 0.5em; font-size: 80%; display: inline-block">
+        \begin{align}
+        & \text{Predicate: INFORM}\\
+        & \text{______________________}\\
+        & \text{name = X-name-1}\\
+        & \text{dogs_allowed = yes}
+        \end{align}
+        </p>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sequence-correction">Sequence correction<a class="anchor-link" href="#Sequence-correction">&#182;</a></h3><p><center>
+<img src="images/seqCorrection5.png" width="70%">
+</center>
+<br>
+<br></p>
+<div style="display:inline-block;">
+<small>
+        <p style="border:2px; border-radius: 15px; background-color:white; border-style:solid; border-color:black; padding: 0.5em; font-size: 80%; display: inline-block">
+        \begin{align}
+        & \text{Predicate: INFORM}\\
+        & \text{______________________}\\
+        & \text{name = X-name-1}\\
+        & \text{dogs_allowed = yes}
+        \end{align}
+        </p>
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sequence-correction">Sequence correction<a class="anchor-link" href="#Sequence-correction">&#182;</a></h3><p>After a suboptimal action, correct the rollin using $\pi^{\star}$.
+<br>
+<br>
+<br>
+<br></p>
+<p><center>
+<img src="images/seqCorrection0.png" width="70%">
+</center>
+<br>
+<br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sequence-correction">Sequence correction<a class="anchor-link" href="#Sequence-correction">&#182;</a></h3><p>After a suboptimal action, correct the rollin using $\pi^{\star}$.
+<br>
+<br>
+And re-rollin the rest of the sequence using the classifier $H$.
+<br>
+<br></p>
+<p><center>
+<img src="images/seqCorrection2.png" width="70%">
+</center>
+<br>
+<br></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sequence-correction">Sequence correction<a class="anchor-link" href="#Sequence-correction">&#182;</a></h3><p>After a suboptimal action, correct the rollin using $\pi^{\star}$.
+<br>
+<br>
+And re-rollin the rest of the sequence using the classifier $H$.
+<br>
+<br></p>
+<p><center>
+<img src="images/seqCorrection2.png" width="70%">
+</center>
+<br>
+Before correcting, allow a number of actions after the suboptimal one.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="NLG-automatic-evaluation">NLG automatic evaluation<a class="anchor-link" href="#NLG-automatic-evaluation">&#182;</a></h3><p><br></p>
+<p><center>
+<img src="images/seqCorrectResults.png" style="width:40%; float: left; transform: translateY(40%);">
+<br>
+<img src="images/NLG_policyResults.jpg" style="width:50%; float: right;" class="fragment">
+</center>
+<!--<img src="images/NLG_policyResults.jpg" style="width:70%;">--></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Comparison-against-state-of-the-art">Comparison against state of the art<a class="anchor-link" href="#Comparison-against-state-of-the-art">&#182;</a></h3><p><img src="images/NLGResults.png"></p>
+<p>
+<ul>
+<li>SFO datasets have overlap in training/dev/test</li>
+<li>Dusek and Jurcicek used manually engineered templates</li>
+</ul>
+</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13350,7 +13598,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13364,7 +13612,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </ul>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13375,7 +13623,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </center>
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13384,31 +13632,31 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 <p>but harder:</p>
 <ul>
 <li>long action sequences (50-200), theoretically unbounded</li>
-<li>many possible actions (~10^4) (each concept is an action)</li>
+<li>many possible actions (~10^4)</li>
 </ul>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Imitation-learning-for-AMR-parsing-(Goodman-et-al.)">Imitation learning for AMR parsing (<a href="http://aclweb.org/anthology/P16-1001">Goodman et al.</a>)<a class="anchor-link" href="#Imitation-learning-for-AMR-parsing-(Goodman-et-al.)">&#182;</a></h3><p>Improved transition-based AMR pasing with</p>
+<h3 id="Imitation-learning-for-AMR-parsing-(Goodman-et-al.,-2016)">Imitation learning for AMR parsing (<a href="http://aclweb.org/anthology/P16-1001">Goodman et al., 2016</a>)<a class="anchor-link" href="#Imitation-learning-for-AMR-parsing-(Goodman-et-al.,-2016)">&#182;</a></h3><p>Improved transition-based AMR pasing with</p>
 <ul>
 <li>DAgger (rollins)</li>
 <li>V-DAgger (rollouts)</li>
 </ul>
-<p>Two novel ingredients to help:</p>
+<p><strong>targeted exploration</strong>: rollout (and evaluate the loss) only of</p>
 <ul>
-<li>targetted exploration</li>
-<li>noise reduction</li>
+<li>the action returned by the expert</li>
+<li>the actions scored by the classifier within a threshold $\tau$ from the highest scoring action</li>
 </ul>
 
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13432,7 +13680,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 </p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13442,7 +13690,7 @@ $$\pi^{out} = \beta\pi^{\star} + (1-\beta)H$$
 past actions with discrete features.</p><p>Long action histories are difficult to capture:
 <ul>
 <li>simple features (e.g. previous action) are not discriminative</li>
-<li>complex features are sparse and difficult to learn weights</li>
+<li>complex features are sparse and difficult to learn weights for</li>
 </ul>
 </p><p class="fragment" data-fragment-index="1">Badly described instances act as noise during training.</p><p class="fragment" data-fragment-index="1">
 Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/khardon07a.pdf">Khardon and Wachman, 2007</a>):
@@ -13450,7 +13698,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 </p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13461,7 +13709,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13480,7 +13728,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13495,7 +13743,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 </ul></p>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13506,7 +13754,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 </center>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13516,84 +13764,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 <p>Wang et al. (2015b) also used a semantic role labeler, coreference resolver, a word sense disambiguation system, etc.</p>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><h3>Natural Language Generation (NLG)</h3>
-<img src="images/nlg.png" style="width:80%; background:white;" /></p>
-<p>
-<ul>
-<li>The reverse of semantic parsing</li>
-<li>Unlike machine translation, labeled data is rather limited</li>
-</ul>
-</p>
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><h3>Learning NLG</h3>
-<img src="images/ContentAndWord.png" style="width:100%; background:white;" /></p>
-<p>
-<ul>
-<li>Two-stage process: content and word prediction</li>
-<li>Unaligned training data underspecifies expert policy</li>
-</ul>
-</p>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Imitation-learning-for-NLG-(Lampouras-and-Vlachos-2016)">Imitation learning for NLG (<a href="https://aclweb.org/anthology/C/C16/C16-1105.pdf">Lampouras and Vlachos 2016</a>)<a class="anchor-link" href="#Imitation-learning-for-NLG-(Lampouras-and-Vlachos-2016)">&#182;</a></h3><p>Combined elements of <a href="http://www.umiacs.umd.edu/~hal/docs/daume09searn.pdf">SEARN</a> and <a href="https://arxiv.org/abs/1502.02206">LOLS</a>:</p>
-<ul>
-<li><strong>rollin</strong> using the classifier (LOLS)</li>
-<li>at each timestep <strong>rollout</strong> with expert or classifier exclusively (LOLS) with decaying probability for the former (SEARN)</li>
-</ul>
-<p>Improved performance further by <strong>sequence correction</strong>:</p>
-<ul>
-<li>avoiding generating training examples from very bad rollins</li>
-<li>correct them instead and rollin again</li>
-</ul>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="NLG-dev-results">NLG dev results<a class="anchor-link" href="#NLG-dev-results">&#182;</a></h3><p><br>
-<img src="images/NLG_policyResults.jpg" style="width:70%;"></p>
-
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Comparison-against-state-of-the-art">Comparison against state of the art<a class="anchor-link" href="#Comparison-against-state-of-the-art">&#182;</a></h3><p><img src="images/NLGResults.png"></p>
-<p>
-<ul>
-<li>SFO datasets have overlap in training/dev/test</li>
-<li>Dusek and Jurcicek used manually engineered rules</li>
-</ul>
-</p>
-</div>
-</div>
-</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13604,7 +13775,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 </center>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13620,7 +13791,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13635,7 +13806,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 
 </div>
 </div>
-</div></div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13650,7 +13821,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
             </p>
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13658,15 +13829,18 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Imitation-learning-and-RNNs">Imitation learning and RNNs<a class="anchor-link" href="#Imitation-learning-and-RNNs">&#182;</a></h3><p><img src="images/mixer.png" width="70%"  style="background:none;" /></p>
 <ul>
-<li>DAgger mixed rollins, similar to scheduled sampling (<a href="http://arxiv.org/abs/1506.03099">Bengio et al., 2015</a>)</li>
-<li>MIXER  (<a href="https://arxiv.org/abs/1511.06732">Ranzato et al., 2016</a>): Mix REINFORCE-ment learning with imitation: we have the expert policy!</li>
+<li>Scheduled sampling (<a href="http://arxiv.org/abs/1506.03099">Bengio et al., 2015</a>): DAgger rollins </li>
+<li>MIXER  (<a href="https://arxiv.org/abs/1511.06732">Ranzato et al., 2016</a>): Mix REINFORCE-ment learning with imitation!<ul>
 <li>no rollouts, learn a  regressor to estimate action costs</li>
 <li>end-to-end back propagation through the sequence</li>
+</ul>
+</li>
+<li>SEARNN (<a href="https://arxiv.org/abs/1706.04499">Leblond et al. 2018</a>): Use a modified SEARN combined with targeted exploration to scale</li>
 </ul>
 
 </div>
 </div>
-</div></section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13681,7 +13855,7 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13697,7 +13871,33 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 
 </div>
 </div>
-</div></section><section>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Practical-advice">Practical advice<a class="anchor-link" href="#Practical-advice">&#182;</a></h3><p>Check:</p>
+<ul>
+<li>the expert policy is a good (suboptimal is fine) teacher</li>
+<li>the (often approximated) loss function is sensible</li>
+<li>the rollouts are informative</li>
+</ul>
+<p>Most improvements were inspired by these!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When <strong>not to use imitation learning</strong>: when you can argmax over the structured output without sacrifices</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13711,69 +13911,19 @@ Used the $\alpha$-bound (<a href="http://www.jmlr.org/papers/volume8/khardon07a/
 <p><li>V-DAgger ([in Scala](https://github.com/hopshackle/dagger-AMR)) ([in Python](https://github.com/sheffieldnlp/APEimitaion))</li></p>
 <p><li>LOLS ([in Java](https://github.com/glampouras/JLOLS_NLG))
 </li></p>
-<p><li>MIXER ([in Lua](https://research.fb.com/downloads/mixer/))</li>
+<p><li>MIXER ([in Lua](https://research.fb.com/downloads/mixer/))</li></p>
+<p><li> Just released: [Python3+scikit-learn](https://github.com/andreasvlachos/structured_imitation_demo) library with demo for the example used </li>
 &lt;/ul&gt;
 &lt;/p&gt;</p>
 
 </div>
 </div>
-</div></section></section>
 </div>
-</div>
-
-<script>
-
-require(
-    {
-      // it makes sense to wait a little bit when you are loading
-      // reveal from a cdn in a slow connection environment
-      waitSeconds: 15
-    },
-    [
-      "reveal.js/lib/js/head.min.js",
-      "reveal.js/js/reveal.js"
-    ],
-
-    function(head, Reveal){
-
-        // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            history: true,
-
-            theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-            transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/none
-
-            // Optional libraries used to extend on reveal.js
-            dependencies: [
-                { src: "reveal.js/lib/js/classList.js",
-                  condition: function() { return !document.body.classList; } },
-                { src: "reveal.js/plugin/notes/notes.js",
-                  async: true,
-                  condition: function() { return !!document.body.classList; } }
-            ]
-        });
-
-        var update = function(event){
-          if(MathJax.Hub.getAllJax(Reveal.getCurrentSlide())){
-            MathJax.Hub.Rerender(Reveal.getCurrentSlide());
-          }
-        };
-
-        Reveal.addEventListener('slidechanged', update);
-
-        var update_scroll = function(event){
-          $(".reveal").scrollTop(0);
-        };
-
-        Reveal.addEventListener('slidechanged', update_scroll);
-
-    }
-);
-</script>
-
+    </div>
+  </div>
 </body>
+
+ 
 
 
 </html>
